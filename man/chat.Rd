@@ -7,7 +7,7 @@
 chat(umFit, type = "marginal")
 }
 \arguments{
-\item{umFit}{An object from a model fitted using \link[unmarked]{pcount}.}
+\item{umFit}{An object of class \link[unmarked]{unmarkedFit} from a model fitted using \link[unmarked]{pcount}.}
 
 \item{type}{The type of metric to compute, one of 'marginal', 'site-sum' or 'observation'.}
 }
@@ -15,7 +15,7 @@ chat(umFit, type = "marginal")
 An estimate of overdispersion relative to the fitted model.
 }
 \description{
-Computes various types of overdispersion metrics for binomial N-mixture models.
+Computes various types of overdispersion metrics, based on Pearson residuals, for binomial N-mixture models.
 }
 \examples{
 library(unmarked)

@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // pbinsumRow
 NumericVector pbinsumRow(NumericVector y, double N, NumericVector p);
-RcppExport SEXP nmixgof_pbinsumRow(SEXP ySEXP, SEXP NSEXP, SEXP pSEXP) {
+RcppExport SEXP _nmixgof_pbinsumRow(SEXP ySEXP, SEXP NSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -20,7 +20,7 @@ END_RCPP
 }
 // pbinsum
 NumericMatrix pbinsum(NumericMatrix y, NumericVector N, NumericMatrix p);
-RcppExport SEXP nmixgof_pbinsum(SEXP ySEXP, SEXP NSEXP, SEXP pSEXP) {
+RcppExport SEXP _nmixgof_pbinsum(SEXP ySEXP, SEXP NSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -33,8 +33,8 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"nmixgof_pbinsumRow", (DL_FUNC) &nmixgof_pbinsumRow, 3},
-    {"nmixgof_pbinsum", (DL_FUNC) &nmixgof_pbinsum, 3},
+    {"_nmixgof_pbinsumRow", (DL_FUNC) &_nmixgof_pbinsumRow, 3},
+    {"_nmixgof_pbinsum", (DL_FUNC) &_nmixgof_pbinsum, 3},
     {NULL, NULL, 0}
 };
 

@@ -4,17 +4,24 @@
 \alias{residfit}
 \title{Plot residuals against fitted values}
 \usage{
-residfit(umFit, type = "marginal", residual = "rq", ...)
+residfit(umFit, type = "marginal", ...)
 }
 \arguments{
 \item{umFit}{An object from a model fitted using \link[unmarked]{pcount}.}
 
-\item{type}{The type of randomized quantile residual to plot. One of 'margina', 'site-sum' or 'observation'.}
-
-\item{residual}{The type of residual. Only 'rq' currently implemented.}
+\item{type}{The type of randomized quantile residual to plot. One of 'marginal', 'site-sum' or 'observation'.}
 
 \item{...}{Plot arguments.}
 }
 \description{
 Plots randomized-quantile residuals for binomial N-mixture models against fitted values.
+}
+\examples{
+library(unmarked)
+umf = unmarkedFramePCount(y = shoveler$y, obsCovs = shoveler$obs, siteCovs = shoveler$site)
+fmP = pcount(~scale(date) + scale(reedcover) ~ scale(log(water)) + scale(latitude), 
+      data = umf, K = 80)
+residfit(fmP, "marginal")
+residfit(fmP, "site-sum")
+residfit(fmP, "observation")
 }

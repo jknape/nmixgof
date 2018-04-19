@@ -2,10 +2,10 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 pbinsumRow <- function(y, N, p) {
-    .Call('nmixgof_pbinsumRow', PACKAGE = 'nmixgof', y, N, p)
+    .Call('_nmixgof_pbinsumRow', PACKAGE = 'nmixgof', y, N, p)
 }
 
 pbinsum <- function(y, N, p) {
-    .Call('nmixgof_pbinsum', PACKAGE = 'nmixgof', y, N, p)
+    .Call('_nmixgof_pbinsum', PACKAGE = 'nmixgof', y, N, p)
 }
 

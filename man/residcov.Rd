@@ -7,9 +7,19 @@
 residcov(umFit, ...)
 }
 \arguments{
-\item{...}{}
+\item{umFit}{An object of class \link[unmarked]{unmarkedFit} from a model fitted using \link[unmarked]{pcount}.}
+
+\item{...}{Plot arguments.}
 }
 \description{
+A convenience function to plot rq residuals against all untransformed numeric covariates.
 Site-sum randomized quantile residuals are used for site covariates while marginal residuals are used for observation covariates.
 The same random residual draws are reused for different covariates.
+}
+\examples{
+library(unmarked)
+umf = unmarkedFramePCount(y = shoveler$y, obsCovs = shoveler$obs, siteCovs = shoveler$site)
+fmP = pcount(~scale(date) + scale(reedcover) ~ scale(log(water)) + scale(latitude), 
+      data = umf, K = 80)
+residcov(fmP)
 }

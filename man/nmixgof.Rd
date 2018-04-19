@@ -7,5 +7,5 @@
 \title{Goodness of fit checks for binomial N-mixture models}
 \description{
 The package contains methods to compute overdispersion metrics, randomized quantile residuals,
-and graphical diagnostics of model fit.
+and graphical diagnostics of model fit for binomial N-mixture models fitted using the \link[unmarked]{unmarked} package.
 }
