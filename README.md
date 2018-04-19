@@ -1,4 +1,4 @@
-![Travis-CI Build Status](https://travis-ci.org/jknape/nmixgof.svg?branch=master)](https://travis-ci.org/jknape/nmixgof)
+[![Travis-CI Build Status](https://travis-ci.org/jknape/nmixgof.svg?branch=master)](https://travis-ci.org/jknape/nmixgof)
 
 # nmixgof
 
