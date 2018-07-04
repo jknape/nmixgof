@@ -118,7 +118,7 @@ residqq =  function(umFit, type = "site-sum", main = "Residual qq plot", plotLin
 #' qqnorm(rqresiduals(fmP, "s"))
 #' qqnorm(rqresiduals(fmP, "o"))
 #' par(mfcol = c(3,4))
-#' apply(rqresiduals(fmP, "m"), 2, qqnorm)
+#' invisible(apply(rqresiduals(fmP, "m"), 2, qqnorm))
 rqresiduals = function(umFit, type = "marginal") {
   if (!inherits(umFit,"unmarkedFitPCount")) {
     stop("Argument needs to be a model fitted by the function pcount in the package unmarked.")
@@ -162,7 +162,7 @@ rqResO = function(umFit) {
     rN[-umFit@sitesRemoved] = apply(unmarked::ranef(umFit)@post[,,1], 1 , sample, x = umFit@K + 1, size = 1, replace = FALSE) - 1
   else
     rN = apply(unmarked::ranef(umFit)@post[,,1], 1 , sample, x = umFit@K + 1, size = 1, replace = FALSE) - 1
-  p = unmarked::getP(umFit)
+  p = unmarked::getP(umFit, na.rm = FALSE)
   res = rqRes(umFit@data@y, pFun = stats::pbinom, size = kronecker(rN, t(rep(1, ncol(p)))), prob = p)
   # if (any(is.infinite(res))) {
   #   warning(paste(sum(is.infinite(res)), " residuals infinite."))
@@ -172,11 +172,14 @@ rqResO = function(umFit) {
 
 
 rqResS = function(umFit) {
-  lam = unmarked::predict(umFit, type = "state")[,1]
-  p = unmarked::getP(umFit)
+  lam = unmarked::predict(umFit, type = "state", na.rm = FALSE)[,1]
+  p = unmarked::getP(umFit, na.rm = FALSE)
   res = numeric(nrow(umFit@data@y)) + NA
-  if (length(umFit@sitesRemoved) > 0)
+  if (length(umFit@sitesRemoved) > 0) {
     y = umFit@data@y[-umFit@sitesRemoved,]
+    p = p[-umFit@sitesRemoved,]
+    lam = lam[-umFit@sitesRemoved]
+  }
   else
     y = umFit@data@y
   cumProb = matrix(0, nrow = nrow(y), ncol = 2)
@@ -232,13 +235,13 @@ chat = function(umFit, type = "marginal") {
 }
 
 chatS = function(umFit) {
-  p = unmarked::getP(umFit)
-  lam = unmarked::predict(umFit, "state")[,1]
-  odPar = switch(umFit@mixture, P = NA, ZIP = unmarked::coef(umFit)["psi(psi)"], NB  = unmarked::coef(umFit)["alpha(alpha)"])
-  nVar = switch(umFit@mixture, P = lam, ZIP = lam*(1 + lam * stats::plogis(odPar)/(1 - stats::plogis(odPar))), NB = lam + lam^2 * exp(-odPar))
+  p = unmarked::getP(umFit, na.rm = FALSE)
+  lam = unmarked::predict(umFit, "state", na.rm = FALSE)[,1]
   if (length(umFit@sitesRemoved) > 0) {
     y = umFit@data@y[-umFit@sitesRemoved,]
     expected = unmarked::fitted(umFit, K = umFit@K)[-umFit@sitesRemoved,]
+    lam = lam[-umFit@sitesRemoved]
+    p = p[-umFit@sitesRemoved, ]
   } else {
     y = umFit@data@y
     expected = unmarked::fitted(umFit, K = umFit@K)
@@ -247,16 +250,20 @@ chatS = function(umFit) {
   naMat[which(naMat != 1)] = NA
   obs.site = apply(y * naMat, 1, sum, na.rm = TRUE)
   exp.site = apply(expected * naMat, 1, sum, na.rm = TRUE)
-  var.site = lam * apply(p * (1 - p) * naMat, 1, sum, na.rm = TRUE) +
+  odPar = switch(umFit@mixture, P = NA, ZIP = unmarked::coef(umFit)["psi(psi)"], NB  = unmarked::coef(umFit)["alpha(alpha)"])
+  nVar = switch(umFit@mixture, P = lam, ZIP = lam*(1 + lam * stats::plogis(odPar)/(1 - stats::plogis(odPar))), NB = lam + lam^2 * exp(-odPar))
+    var.site = lam * apply(p * (1 - p) * naMat, 1, sum, na.rm = TRUE) +
     nVar * apply(p * naMat, 1, function(row) {sum(outer(row, row), na.rm = TRUE)})
   chi2 = sum((obs.site - exp.site)^2/var.site)
   chi2/(nrow(y) - length(unmarked::coef(umFit)))
 }
 
+
 chatO = function(umFit) {
-  p = unmarked::getP(umFit)
+  p = unmarked::getP(umFit, na.rm = FALSE)
   if (length(umFit@sitesRemoved) > 0) {
     y = umFit@data@y[-umFit@sitesRemoved,]
+    p = p[-umFit@sitesRemoved, ]
   } else {
     y = umFit@data@y
   }

@@ -25,5 +25,5 @@ fmP = pcount(~scale(date) + scale(reedcover) ~ scale(log(water)) + scale(latitud
 qqnorm(rqresiduals(fmP, "s"))
 qqnorm(rqresiduals(fmP, "o"))
 par(mfcol = c(3,4))
-apply(rqresiduals(fmP, "m"), 2, qqnorm)
+invisible(apply(rqresiduals(fmP, "m"), 2, qqnorm))
 }

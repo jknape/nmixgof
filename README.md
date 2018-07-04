@@ -1,4 +1,5 @@
 [![Travis-CI Build Status](https://travis-ci.org/jknape/nmixgof.svg?branch=master)](https://travis-ci.org/jknape/nmixgof)
+<!-- [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/nmixgof)](https://cran.r-project.org/package=nmixgof) -->
 
 # nmixgof
 
