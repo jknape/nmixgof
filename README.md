@@ -1,5 +1,5 @@
 [![Travis-CI Build Status](https://travis-ci.org/jknape/nmixgof.svg?branch=master)](https://travis-ci.org/jknape/nmixgof)
-<!-- [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/nmixgof)](https://cran.r-project.org/package=nmixgof) -->
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/nmixgof)](https://cran.r-project.org/package=nmixgof)
 
 # nmixgof
 
@@ -9,7 +9,14 @@ Knape et al. 2018. Sensitivity of binomial N-mixture models to overdispersion: t
 
 ## Installation
 
-You can install nmixgof from github with:
+nmixgof is available from [CRAN](https://cran.r-project.org/package=nmixgof) and can be installed through
+
+```r
+install.packages("nmixgof")
+```
+
+
+Alternatively, nmixgof can be installed from github using:
 
 
 ``` r
