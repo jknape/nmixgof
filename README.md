@@ -9,7 +9,7 @@ Knape et al. 2018. Sensitivity of binomial N-mixture models to overdispersion: t
 
 ## Installation
 
-nmixgof is available from [CRAN](https://cran.r-project.org/package=nmixgof) and can be installed through
+nmixgof is available from [CRAN](https://cran.r-project.org/package=nmixgof) and can be installed in R through
 
 ```r
 install.packages("nmixgof")
