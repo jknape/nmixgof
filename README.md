@@ -3,7 +3,7 @@
 
 # nmixgof
 
-The nmixgof package provides tools to assess goodness of fit for binomial N-mixture models fitted using the unmarked package. The goodness of fit methods are detailed in Knape et al. (2018).
+The nmixgof package provides tools to assess goodness of fit for binomial N-mixture models fitted using the unmarked package. The goodness of fit methods are detailed in [Knape et al. (2018)](https://doi.org/10.1111/2041-210X.13062).
 
 Knape et al. 2018. Sensitivity of binomial N-mixture models to overdispersion: the importance of assessing model fit. Methods in Ecology and Evolution, in press. ([Preprint](https://www.biorxiv.org/content/early/2017/09/27/194340)).
 
