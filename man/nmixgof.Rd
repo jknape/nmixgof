@@ -2,15 +2,27 @@
 % Please edit documentation in R/nmixgof.R
 \docType{package}
 \name{nmixgof}
-\alias{nmixgof}
 \alias{nmixgof-package}
+\alias{nmixgof}
 \title{Goodness of fit checks for binomial N-mixture models}
 \description{
 The package contains methods to compute overdispersion metrics, randomized quantile residuals,
 and graphical diagnostics of model fit for binomial N-mixture models fitted using the \link[unmarked]{unmarked} package.
-Details about the checks are given in Knape et al. (2018) and at \url{https://www.biorxiv.org/content/early/2017/09/27/194340}.
+Details about the checks are given in Knape et al. (2018).
 }
 \references{
 Knape et al. 2018. Sensitivity of binomial N-mixture models to overdispersion: 
-the importance of assessing model fit. Methods in Ecology and Evolution, in press.
+the importance of assessing model fit. Methods in Ecology and Evolution, 9:2102-2114. \doi{10.1111/2041-210X.13062}
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/jknape/nmixgof}
+  \item Report bugs at \url{https://github.com/jknape/nmixgof/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Jonas Knape \email{jonas.knape@slu.se} (\href{https://orcid.org/0000-0002-8012-5131}{ORCID})
+
 }

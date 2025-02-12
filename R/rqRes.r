@@ -264,10 +264,11 @@ chatO = function(umFit) {
   if (length(umFit@sitesRemoved) > 0) {
     y = umFit@data@y[-umFit@sitesRemoved,]
     p = p[-umFit@sitesRemoved, ]
+    rN = apply(unmarked::ranef(umFit)@post[-umFit@sitesRemoved,,1], 1 , sample, x = umFit@K + 1, size = 1, replace = FALSE) - 1
   } else {
     y = umFit@data@y
+    rN = apply(unmarked::ranef(umFit)@post[,,1], 1 , sample, x = umFit@K + 1, size = 1, replace = FALSE) - 1
   }
-  rN = apply(unmarked::ranef(umFit)@post[,,1], 1 , sample, x = umFit@K + 1, size = 1, replace = FALSE) - 1
   naMat = (is.finite(y + p))
   naMat[which(naMat != 1)] = NA
   obs.site = apply(y * naMat, 1, sum, na.rm = TRUE)

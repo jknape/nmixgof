@@ -4,8 +4,13 @@
 \alias{residqq}
 \title{Qq plot of randomized quantile residuals against standard normal quantiles}
 \usage{
-residqq(umFit, type = "site-sum", main = "Residual qq plot",
-  plotLine = TRUE, ...)
+residqq(
+  umFit,
+  type = "site-sum",
+  main = "Residual qq plot",
+  plotLine = TRUE,
+  ...
+)
 }
 \arguments{
 \item{umFit}{An object of class \link[unmarked]{unmarkedFit} from a model fitted using \link[unmarked]{pcount}.}
