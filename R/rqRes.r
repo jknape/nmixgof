@@ -157,11 +157,10 @@ rqResM = function(umFit) {
 }
 
 rqResO = function(umFit) {
-  rN = integer(nrow(umFit@data@y)) + NA
-  if (length(umFit@sitesRemoved) > 0)
-    rN[-umFit@sitesRemoved] = apply(unmarked::ranef(umFit)@post[,,1], 1 , sample, x = umFit@K + 1, size = 1, replace = FALSE) - 1
-  else
-    rN = apply(unmarked::ranef(umFit)@post[,,1], 1 , sample, x = umFit@K + 1, size = 1, replace = FALSE) - 1
+  rN = apply(unmarked::ranef(umFit)@post[,,1], 1 , function(z){
+    if(any(is.na(z))) return(NA)
+    sample(z, x = umFit@K+1, size = 1, replace=FALSE) -1
+  })
   p = unmarked::getP(umFit, na.rm = FALSE)
   res = rqRes(umFit@data@y, pFun = stats::pbinom, size = kronecker(rN, t(rep(1, ncol(p)))), prob = p)
   # if (any(is.infinite(res))) {
@@ -261,14 +260,19 @@ chatS = function(umFit) {
 
 chatO = function(umFit) {
   p = unmarked::getP(umFit, na.rm = FALSE)
+  rpost = unmarked::ranef(umFit)@post[,,1]
   if (length(umFit@sitesRemoved) > 0) {
     y = umFit@data@y[-umFit@sitesRemoved,]
     p = p[-umFit@sitesRemoved, ]
-    rN = apply(unmarked::ranef(umFit)@post[-umFit@sitesRemoved,,1], 1 , sample, x = umFit@K + 1, size = 1, replace = FALSE) - 1
+    # if missing rows were not already removed from ranef output
+    if(nrow(rpost) > nrow(y)){
+      rpost = rpost[-umFit@sitesRemoved,,drop=FALSE]
+      stopifnot(nrow(rpost) == nrow(y))
+    }
   } else {
     y = umFit@data@y
-    rN = apply(unmarked::ranef(umFit)@post[,,1], 1 , sample, x = umFit@K + 1, size = 1, replace = FALSE) - 1
   }
+  rN = apply(rpost, 1 , sample, x = umFit@K + 1, size = 1, replace = FALSE) - 1
   naMat = (is.finite(y + p))
   naMat[which(naMat != 1)] = NA
   obs.site = apply(y * naMat, 1, sum, na.rm = TRUE)
@@ -333,4 +337,3 @@ residcov = function(umFit, ...) {
     }
   }
 }
-
